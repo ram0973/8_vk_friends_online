@@ -73,23 +73,26 @@ python vk_friends_online.py
 в константе VK_SCOPE. После этого надо будет заново получить токен и прописать
  его в secrets.py.
  
-Если нужно изменить название файла с с токеном, можно поменять константу 
+Если нужно изменить название файла с токеном, можно поменять константу 
 SECRETS_FILE_NAME в vk_get_token.py. После этого надо обязательно указать 
  новое имя файла в .gitignore
- 
 
 ## Запуск
 
 Windows
+
 ```
 python vk_get_token.py
 python vk_friends_online.py
-``` 
+```
+ 
 Linux
+
 ``` 
 python3 vk_get_token.py
 python3 vk_friends_online.py
-``` 
+```
+ 
 ## Лицензия
 
 [MIT](http://opensource.org/licenses/MIT)
