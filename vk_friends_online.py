@@ -1,32 +1,40 @@
-import vk
+﻿# -*- coding: utf-8 -*-
+import os
+import sys
+import vk_requests
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+from vk_get_token import SECRETS_FILE_NAME
 
 
-APP_ID = -1  # чтобы получить app_id, нужно зарегистрировать своё приложение на https://vk.com/dev
+def enable_win_unicode_console():
+    """
+    Включаем правильное отображение unicode в консоли под MS Windows
+    """
+    if sys.platform == 'win32':
+        import win_unicode_console
+        win_unicode_console.enable()
 
-
-def get_user_login():
-    pass
-
-
-def get_user_password():
-    pass
-
-
-def get_online_friends(login, password):
-    session = vk.AuthSession(
-        app_id=APP_ID,
-        user_login=login,
-        user_password=password,
-    )
-    api = vk.API(session)
-    # например, api.friends.get()
-
-
-def output_friends_to_console(friends_online):
-    pass
 
 if __name__ == '__main__':
-    login = get_user_login()
-    password = get_user_password()
-    friends_online = get_online_friends(login, password)
-    output_friends_to_console(friends_online)
+
+    enable_win_unicode_console()
+
+    dotenv_path = join(dirname(__file__), SECRETS_FILE_NAME)
+    load_dotenv(dotenv_path)
+
+    vk_app_token = os.environ.get('VK_APP_TOKEN')
+
+    if vk_app_token:
+        api = vk_requests.create_api(access_token=vk_app_token)
+    else:
+        print('Не указан токен в файле %s' % SECRETS_FILE_NAME)
+        exit(1)
+
+    friends_online = api.friends.getOnline()
+    friends_online_list = api.users.get(
+        user_ids=', '.join([str(x) for x in friends_online]))
+    print('\nВаши друзья онлайн:\n')
+    for friend in friends_online_list:
+        print('%s %s' % (friend['first_name'], friend['last_name']))
