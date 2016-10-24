@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 import sys
 
 SECRETS_FILE_NAME = '.secrets'
+#  права приложения через запятую, без пробелов
+#  https://vk.com/dev/permissions
 VK_SCOPE = 'friends,offline'
 
 
