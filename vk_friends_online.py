@@ -27,13 +27,13 @@ if __name__ == '__main__':
     vk_app_token = os.environ.get('VK_APP_TOKEN')
 
     if vk_app_token:
-        api = vk_requests.create_api(access_token=vk_app_token)
+        vk_api = vk_requests.create_api(access_token=vk_app_token)
     else:
         print('Не указан токен в файле %s' % SECRETS_FILE_NAME)
         exit(1)
 
-    friends_online = api.friends.getOnline()
-    friends_online_list = api.users.get(
+    friends_online = vk_api.friends.getOnline()
+    friends_online_list = vk_api.users.get(
         user_ids=', '.join([str(x) for x in friends_online]))
     print('\nВаши друзья онлайн:\n')
     for friend in friends_online_list:

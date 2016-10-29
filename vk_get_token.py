@@ -29,10 +29,10 @@ if __name__ == '__main__':
 
     vk_app_id = os.environ.get('VK_APP_ID')
     if vk_app_id:
-        url = 'https://oauth.vk.com/authorize?client_id=' + vk_app_id + \
-          '&scope=' + VK_SCOPE + '&redirect_uri=' + \
-          'https://oauth.vk.com/blank.html' + \
-          '&display=page&v=5.59&response_type=token'
+        url = 'https://oauth.vk.com/authorize?client_id={0}' + \
+            '&scope={1}&redirect_uri=https://oauth.vk.com/blank.html' + \
+            '&display=page&v=5.59&response_type=token' \
+            .format(vk_app_id, VK_SCOPE)
         webbrowser.open(url)
     else:
         print('Не указан VK_APP_ID в файле %s' % SECRETS_FILE_NAME)
