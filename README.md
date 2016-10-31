@@ -23,6 +23,7 @@
 Python 3.5.2+
 Внешний модуль vk-requests
 Внешний модуль win-unicode-console
+Внешний модуль dotenv
 ```
 
 ## Установка
